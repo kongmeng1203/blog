@@ -1,5 +1,6 @@
 package com.gzx.blog.controller;
 
+import com.gzx.blog.common.Cache.Cache;
 import com.gzx.blog.common.aop.LogAnnotation;
 import com.gzx.blog.dos.Archives;
 import com.gzx.blog.pojo.Article;
@@ -26,12 +27,14 @@ public class ArticleController {
      */
     @PostMapping
     @LogAnnotation(module = "文章",operator = "文章列表")
+    @Cache(expire = 5*60*1000,name = "articlelist")
     public Result listArticle(@RequestBody PageParams params){
         //System.out.println(articleService.listArticle(params));
         return articleService.listArticle(params);
     }
 
     @PostMapping("hot")
+    @Cache(expire = 5*60*1000,name = "hot_article")
     public Result hotArticle(){
         int limit=5;
         Result list=articleService.hotArticle(limit);
@@ -39,12 +42,14 @@ public class ArticleController {
     }
 
     @PostMapping("new")
+    @Cache(expire = 5*60*1000,name = "new_article")
     public Result newArticle(){
         int limit = 5;
         return articleService.newArticle(limit);
     }
 
     @PostMapping("listArchives")
+    @Cache(expire = 5*60*1000,name = "list_article")
     public Result listArchives(){
         Result list=articleService.listArchives();
         return list;

@@ -11,7 +11,7 @@ import java.util.List;
 
 @Data
 public class ArticleVo {
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    //@JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long id;
 
     private String title;
